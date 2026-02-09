@@ -1,0 +1,25 @@
+{
+  "name": "LIGI KUU PRO",
+  "short_name": "LigiPro",
+  "description": "Simamia ligi zako kitaalam kwa urahisi.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipromanager",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipromanager",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
