@@ -1,7 +1,7 @@
 {
   "name": "LIGI KUU PRO",
   "short_name": "LigiPro",
-  "description": "Simamia ligi zako kitaalam kwa urahisi.",
+  "description": "Simamia ligi zako kitaalam na AI mkononi mwako.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#020617",
@@ -9,12 +9,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipromanager",
+      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipro1",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipromanager",
+      "src": "https://api.dicebear.com/7.x/identicon/svg?seed=ligipro1",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -1,6 +1,6 @@
 
 import React, { useState, useRef } from 'react';
-import { Trophy, Plus, Trash2, CheckCircle2, X, Camera, Globe } from 'lucide-react';
+import { Trophy, Plus, Trash2, CheckCircle2, X, Camera, Upload } from 'lucide-react';
 import { League, AppState, SportType, TournamentFormat } from '../types';
 
 interface Props {
@@ -110,7 +110,7 @@ const LeagueManager: React.FC<Props> = ({ state, onAddLeague, onDeleteLeague, on
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
           <div className="glass-card w-full max-w-lg p-10 rounded-[3rem] relative animate-in zoom-in duration-300 shadow-2xl border border-white/10">
             <button onClick={() => setShowModal(false)} className="absolute top-8 right-8 p-2 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all"><X className="w-5 h-5" /></button>
             
@@ -122,16 +122,21 @@ const LeagueManager: React.FC<Props> = ({ state, onAddLeague, onDeleteLeague, on
                   onClick={() => fileInputRef.current?.click()}
                   className="w-28 h-28 bg-slate-950 rounded-3xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center cursor-pointer hover:border-blue-500 transition-all overflow-hidden relative group"
                 >
+                  <input type="file" ref={fileInputRef} onChange={handleLogoChange} accept="image/*" className="hidden" />
                   {logo ? (
-                    <img src={logo} className="w-full h-full object-cover" alt="Logo preview" />
+                    <>
+                      <img src={logo} className="w-full h-full object-cover" alt="Logo preview" />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Upload className="text-white w-8 h-8" />
+                      </div>
+                    </>
                   ) : (
                     <>
                       <Camera className="w-8 h-8 text-slate-600 mb-2 group-hover:text-blue-500" />
-                      <span className="text-[9px] text-slate-600 font-bold uppercase tracking-widest group-hover:text-blue-500">Picha ya Ligi</span>
+                      <span className="text-[9px] text-slate-600 font-bold uppercase tracking-widest group-hover:text-blue-500">Pakia Logo</span>
                     </>
                   )}
                 </div>
-                <input type="file" ref={fileInputRef} onChange={handleLogoChange} accept="image/*" className="hidden" />
               </div>
 
               <div className="space-y-6">
@@ -141,8 +146,8 @@ const LeagueManager: React.FC<Props> = ({ state, onAddLeague, onDeleteLeague, on
                     type="text" 
                     value={newLeague.name}
                     onChange={e => setNewLeague({...newLeague, name: e.target.value})}
-                    className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 transition-colors font-bold"
-                    placeholder="Mfano: CHAMPIONS LEAGUE, NDONDO CUP..."
+                    className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 transition-colors font-bold text-white"
+                    placeholder="CHAMPIONS LEAGUE..."
                     required
                   />
                 </div>
@@ -153,12 +158,10 @@ const LeagueManager: React.FC<Props> = ({ state, onAddLeague, onDeleteLeague, on
                     <select 
                       value={newLeague.sport}
                       onChange={e => setNewLeague({...newLeague, sport: e.target.value as SportType})}
-                      className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 font-bold appearance-none"
+                      className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 font-bold appearance-none text-white"
                     >
                       <option value="Football">Football</option>
                       <option value="Basketball">Basketball</option>
-                      <option value="Netball">Netball</option>
-                      <option value="Volleyball">Volleyball</option>
                     </select>
                   </div>
                   <div>
@@ -166,11 +169,10 @@ const LeagueManager: React.FC<Props> = ({ state, onAddLeague, onDeleteLeague, on
                     <select 
                       value={newLeague.format}
                       onChange={e => setNewLeague({...newLeague, format: e.target.value as TournamentFormat})}
-                      className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 font-bold appearance-none"
+                      className="w-full bg-slate-950 border border-white/5 rounded-2xl p-5 focus:outline-none focus:border-blue-500 font-bold appearance-none text-white"
                     >
-                      <option value="League">Mzunguko (League)</option>
-                      <option value="Knockout">Mtoano (Knockout)</option>
-                      <option value="GroupStage">Makundi</option>
+                      <option value="League">Mzunguko</option>
+                      <option value="Knockout">Mtoano</option>
                     </select>
                   </div>
                 </div>

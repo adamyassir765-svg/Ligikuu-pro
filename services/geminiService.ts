@@ -6,18 +6,20 @@ import { GoogleGenAI } from "@google/genai";
  */
 export const generateMatchPosterPrompt = async (homeName: string, awayName: string): Promise<string> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    if (!process.env.API_KEY) throw new Error("API_KEY missing");
+
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: `Create a cinematic, high-energy image generation prompt for a football match poster: ${homeName} vs ${awayName}. Focus on epic stadium lighting, team spirit, and professional sports photography style. No text in the image.`,
+      contents: `Generate a cinematic, detailed AI image prompt for a sports match poster: ${homeName} vs ${awayName}. Description: Epic stadium lighting, smoke, professional team branding, dramatic atmosphere, high definition. No text in the background.`,
       config: {
-        systemInstruction: "You are a creative director for a top sports agency. Your job is to write detailed prompts for AI image generation. Output ONLY the prompt text."
+        systemInstruction: "You are a professional creative prompt engineer. Output only the prompt text for image generation."
       }
     });
-    return response.text || `Epic football match poster of ${homeName} vs ${awayName}, stadium background, cinematic lighting, 8k resolution.`;
+    return response.text || `Epic sports match poster, ${homeName} vs ${awayName}, stadium lighting, 8k.`;
   } catch (error) {
-    console.error("Error generating match poster prompt:", error);
-    return `Cinematic sports poster, football match, stadium atmosphere, 8k.`;
+    console.error("AI Text Error:", error);
+    return `Cinematic sports match poster for ${homeName} vs ${awayName}, dramatic lighting, 8k.`;
   }
 };
 
@@ -26,7 +28,9 @@ export const generateMatchPosterPrompt = async (homeName: string, awayName: stri
  */
 export const generatePosterImage = async (prompt: string): Promise<string | null> => {
   try {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    if (!process.env.API_KEY) throw new Error("API_KEY missing");
+
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash-image',
       contents: {
@@ -48,7 +52,7 @@ export const generatePosterImage = async (prompt: string): Promise<string | null
     }
     return null;
   } catch (error) {
-    console.error("Error generating poster image:", error);
+    console.error("AI Image Error:", error);
     return null;
   }
 };
