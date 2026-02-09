@@ -14,12 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <script>
-      // Force clear old caches
+      // Force clear old caches ONLY ONCE if needed, but not user data
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister()));
       }
-      // Clear every possible old storage key
-      ['ligi_kuu_state', 'ligi_kuu_pro_v3', 'ligi_kuu_final_ultra_v1'].forEach(k => localStorage.removeItem(k));
     </script>
     <style>
         body {
@@ -39,6 +37,12 @@
           100% { transform: translateX(-50%); }
         }
         .animate-ticker { animation: ticker 30s linear infinite; }
+        
+        /* Custom scrollbar for a pro feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.5); }
     </style>
 <script type="importmap">
 {
